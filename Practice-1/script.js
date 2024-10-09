@@ -4,15 +4,6 @@ const modalOpenButton = document.querySelector(".open-modal__button");
 const form = document.querySelector("form");
 const submitButton = document.querySelector(".form__submit-button");
 
-// form.addEventListener("input", () => {
-//     console.log(form.checkValidity());
-//     if (form.checkValidity()) {
-//         submitButton.disabled = false;
-//     } else {
-//         submitButton.disabled = true;
-//     }
-// });
-
 const checkFormValidity = () => {
     if (form.checkValidity()) {
         submitButton.disabled = false;
@@ -93,4 +84,27 @@ phoneInput.addEventListener("input", (e) => {
         result += value[i];
     }
     phoneInput.value = result;
+});
+
+const fileInput = document.querySelector(".form__input--file");
+const previewImage = document.querySelector(".form-file__image");
+const resetButton = document.querySelector(".form-file__button-reset");
+
+fileInput.addEventListener("change", (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            previewImage.src = e.target.result;
+        };
+
+        reader.readAsDataURL(file);
+    }
+});
+
+resetButton.addEventListener("click", () => {
+    fileInput.value = "";
+    previewImage.src = "assets/logo-light.jpg";
 });
