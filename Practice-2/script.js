@@ -1,17 +1,17 @@
-async function fetchData() {
+const fetchData = async () => {
     try {
         const response = await fetch("https://jsonplaceholder.typicode.com/posts");
         if (!response.ok) {
             throw new Error("Не удалось получить данные");
         }
         const data = await response.json();
-        populateTable(data);
+        fillTable(data);
     } catch (error) {
         console.error("Ошибка:", error);
     }
-}
+};
 
-function populateTable(data) {
+const fillTable = (data) => {
     const tableBody = document.querySelector(".data-table").querySelector("tbody");
     tableBody.innerHTML = "";
 
@@ -31,6 +31,6 @@ function populateTable(data) {
 
         tableBody.appendChild(row);
     });
-}
+};
 
 document.querySelector(".fetch-button").addEventListener("click", fetchData);
