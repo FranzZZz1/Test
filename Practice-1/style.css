@@ -9,6 +9,17 @@
 
     --form-row-gap: 32px;
     --form-column-gap: 26px;
+
+    --color-accent: #e5266e;
+    --color-accent-hover: #b62a60;
+
+    --color-light: #fff;
+    --color-gray: #c4c4c4;
+    --color-dark: #0c1014;
+    --color-black: #000;
+
+    --input-border-color: #d6dade;
+    --label-color: #6a6e72;
 }
 
 * {
@@ -51,7 +62,7 @@ body {
 
 .modal__content {
     border-radius: 12px;
-    background-color: #fff;
+    background-color: var(--color-light);
 }
 
 .modal-content__container {
@@ -64,7 +75,7 @@ body {
     font-weight: 800;
     font-size: 28px;
     line-height: 121%;
-    color: #0c1014;
+    color: var(--color-dark);
 
     margin: 0;
     margin-bottom: 35px;
@@ -110,11 +121,6 @@ body {
     position: relative;
 }
 
-.form-file__container:hover .form-file__button,
-.form-file__container:hover .form-file__button-reset {
-    opacity: 1;
-}
-
 .form-file__image-container {
     width: 100%;
     height: 100%;
@@ -122,7 +128,7 @@ body {
     border-radius: 50%;
     overflow: hidden;
 
-    background-color: #000;
+    background-color: var(--color-black);
 
     transition: filter 0.25s;
 }
@@ -144,15 +150,11 @@ body {
     padding: 10px;
     border-radius: 50%;
     border: none;
-    background-color: #fff;
+    background-color: var(--color-light);
     transition: background-color 0.25s, opacity 0.25s;
     cursor: pointer;
 
     opacity: 0;
-}
-
-.form-file__button-reset:hover {
-    background-color: #c4c4c4;
 }
 
 .form-file__button-reset svg {
@@ -167,7 +169,7 @@ body {
     line-height: 150%;
     text-decoration: underline;
     text-align: center;
-    color: #fff;
+    color: var(--color-light);
 
     position: absolute;
     top: 50%;
@@ -194,7 +196,7 @@ body {
 .form__label,
 .form-file__label {
     font-family: var(--main-font);
-    color: #6a6e72;
+    color: var(--label-color);
 }
 
 .form__label {
@@ -238,12 +240,12 @@ body {
 .form__select {
     font-size: 16px;
     line-height: 150%;
-    color: #0c1014;
+    color: var(--color-dark);
 
     width: 100%;
     min-width: 360px;
     height: 56px;
-    border: 1px solid #d6dade;
+    border: 1px solid var(--input-border-color);
     border-radius: 2px;
 
     padding-left: 16px;
@@ -289,23 +291,20 @@ body {
 .form__submit-button {
     font-family: var(--button-font);
     line-height: 112%;
-    color: #fff;
+    color: var(--color-light);
 
     width: 100%;
     padding: 15px 0;
     margin-bottom: 15px;
 
     border-radius: 4px;
-    background-color: #e5266e;
+    background-color: var(--color-accent);
     transition: background-color 0.25s;
 }
 
 .form__submit-button:disabled {
     background-color: #4d4c4c;
-}
-
-.form__submit-button:hover {
-    background-color: #b62a60;
+    cursor: no-drop;
 }
 
 .form__reset-button {
@@ -369,21 +368,12 @@ body {
         margin-bottom: 10px;
     }
 
-    .form-file__button {
-        position: relative;
-        top: 0;
-        left: 0;
-        opacity: 1;
-
-        color: #0c1014;
-    }
-
     .form-file__button-icon {
         display: none;
     }
 }
 
-@media (min-width: 656px) {
+@media (min-width: 656px) and (hover: hover) {
     .form-file__container:hover .form-file__image-container {
         filter: brightness(40%);
     }
@@ -393,5 +383,51 @@ body {
     .modal-content__title {
         margin-bottom: 15px;
         font-size: 18px;
+    }
+}
+
+@media (hover: none), (max-width: 655px) {
+    .form-file__button {
+        position: relative;
+        top: 0;
+        left: 0;
+        opacity: 1;
+
+        color: var(--color-dark);
+    }
+
+    .form-file__button-icon {
+        display: none;
+    }
+}
+
+@media (hover: none) {
+    .form__submit-button:not(:disabled):active {
+        background-color: var(--color-accent-hover);
+    }
+
+    .form-file__button-reset {
+        opacity: 1;
+
+        transition: none;
+    }
+
+    .form-file__button-reset:active {
+        background-color: var(--color-gray);
+    }
+}
+
+@media (hover: hover) {
+    .form-file__container:hover .form-file__button,
+    .form-file__container:hover .form-file__button-reset {
+        opacity: 1;
+    }
+
+    .form-file__button-reset:hover {
+        background-color: var(--color-gray);
+    }
+
+    .form__submit-button:not(:disabled):hover {
+        background-color: var(--color-accent-hover);
     }
 }
